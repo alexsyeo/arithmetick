@@ -1,20 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { startSignup, startSetUsername } from '../actions/auth';
+import { login, startFetchUsers, startSignup, startSetUsername } from '../actions/auth';
 
-// TODO:
-// validate user input, and display error messages next to the input areas if applicable
-// include back button
-
-const SignupPage = ({ startSetUsername, startSignup }) => {
+const SignupPage = ({ login, startFetchUsers, startSetUsername, startSignup }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [userSnapshots, setUserSnapshots] = useState([]);
+
+    const usernameExists = () => {
+        let exists = false;
+        userSnapshots.forEach((userSnapshot) => {
+            if (userSnapshot.val().username === username) {
+                exists = true;
+            }
+        })
+
+        return exists;
+    };
+
+    useEffect(() => {
+        startFetchUsers().then((userSnapshots) => { setUserSnapshots(userSnapshots) });
+    }, []);
+
+    useEffect(() => {
+        if (usernameExists()) {
+            const newErrorMessage = 'That username already exists.';
+            setErrorMessage(newErrorMessage);
+        } else {
+            setErrorMessage('');
+        }
+    }, [username]);
 
     const onSubmit = (e) => {
         e.preventDefault();
         startSignup(email, password)
+            .then(({ user }) => login(user.uid))
             .then(() => startSetUsername(username))
             .catch((error) => {
                 const errorCode = error.code;
@@ -22,15 +44,17 @@ const SignupPage = ({ startSetUsername, startSignup }) => {
                 switch(errorCode) {
                     case 'auth/email-already-in-use':
                         newErrorMessage = 'There is already an account using this email address.';
+                        break;
+                    case 'auth/operation-not-allowed':
+                        alert('Email/password accounts are not currently enabled.');
+                        break;
                     case 'auth/invalid-email':
                         newErrorMessage = 'This is not a valid email address. Please use a valid email address.';
-                    case 'auth/operation-not-allowed':
-                        alert('email/password accounts are not currently enabled.');
+                        break;
                     case 'auth/weak-password':
                         newErrorMessage = 'The password was too weak. Please use a password containing at least six characters.';
-                    default:
-                        setErrorMessage(newErrorMessage);
                 }
+                setErrorMessage(newErrorMessage);
             }
         );
     };
@@ -43,7 +67,9 @@ const SignupPage = ({ startSetUsername, startSignup }) => {
                 placeholder="Username"
                 className="text-input"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => {
+                    setUsername(e.target.value);
+                }}
             />
             <input
                 type="text"
@@ -61,7 +87,7 @@ const SignupPage = ({ startSetUsername, startSignup }) => {
             />
             <button
                 className="button"
-                disabled={!email || !password || !username}
+                disabled={errorMessage || !email || !password || !username}
             >
                 Create Account
             </button>
@@ -71,6 +97,8 @@ const SignupPage = ({ startSetUsername, startSignup }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+    login: (uid) => dispatch(login(uid)),
+    startFetchUsers: () => dispatch(startFetchUsers()),
     startSignup: (email, password) => dispatch(startSignup(email, password)),
     startSetUsername: (username) => dispatch(startSetUsername(username))
 });

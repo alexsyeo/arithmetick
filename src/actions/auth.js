@@ -21,6 +21,12 @@ export const startSignup = (email, password) => {
     };
 };
 
+export const startSignIn = (email, password) => {
+    return () => {
+        return firebase.auth().signInWithEmailAndPassword(email, password);
+    };
+};
+
 export const setUsername = (username) => ({
     type: 'SET_USERNAME',
     username
@@ -32,5 +38,24 @@ export const startSetUsername = (username) => {
         return database.ref(`users/${uid}`).set({ username: username }).then(() => {
             dispatch(setUsername(username));
         });
+    };
+};
+
+export const startFetchUsername = () => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return (database.ref(`users/${uid}/username`)).once('value', (snapshot) => {
+            if (snapshot.exists()) {
+                dispatch(setUsername(snapshot.val()));
+            } else {
+                dispatch(setUsername(''));
+            }
+        });
+    }
+}
+
+export const startFetchUsers = () => {
+    return () => {
+        return database.ref('users').once('value');
     };
 };
