@@ -27,6 +27,12 @@ export const startSignIn = (email, password) => {
     };
 };
 
+export const startSignInAnonymous = () => {
+    return () => {
+        return firebase.auth().signInAnonymously();
+    };
+};
+
 export const setUsername = (username) => ({
     type: 'SET_USERNAME',
     username

@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { resetProblem } from '../actions/problem';
 import { incrementScore } from '../actions/score';
-import { loseLife } from '../actions/lives';
+import { startLostLife } from '../actions/lives';
 import evaluateProblem from '../selectors/evaluateProblem';
 import formatProblem from '../utility/formatProblem';
-import { tick } from '../actions/timer';
+import { startTick } from '../actions/timer';
 
 export class MathProblem extends React.Component {
     constructor(props) {
@@ -29,7 +29,7 @@ export class MathProblem extends React.Component {
             }
         });
         this.timerID = setInterval(() => {
-            this.props.tick();
+            this.props.startTick();
         }, 1000);
     }
     componentWillUnmount() {
@@ -47,7 +47,7 @@ export class MathProblem extends React.Component {
             console.log('Correct!');
             this.props.incrementScore(this.state.incrementValue);
         } else {
-            this.props.loseLife();
+            this.props.startLostLife();
         }
 
         this.props.resetProblem(this.state.numElements, this.state.numDigits);
@@ -86,8 +86,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         resetProblem: (numElements, numDigits) => dispatch(resetProblem(numElements, numDigits)),
         incrementScore: (incrementValue) => dispatch(incrementScore(incrementValue)),
-        loseLife: () => dispatch(loseLife()),
-        tick: () => dispatch(tick())
+        startLostLife: () => dispatch(startLostLife()),
+        startTick: () => dispatch(startTick())
     };
 };
 

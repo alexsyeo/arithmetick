@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import DashboardPage from '../components/DashboardPage';
 import Game from '../components/Game';
+import Header from '../components/Header';
 import LoginPage from '../components/LoginPage';
 import NotFoundPage from '../components/NotFoundPage';
 import SignupPage from '../components/SignupPage';
@@ -14,10 +15,11 @@ export const history = createHistory();
 const AppRouter = () => (
     <Router history={history} >
         <div>
+            <Header />
             <Switch>
-                <PublicRoute path="/" component={LoginPage} exact={true} />
-                <PublicRoute path="/signup" component={SignupPage} />
-                <PrivateRoute path="/dashboard" component={DashboardPage} />
+                <Route path="/" component={DashboardPage} exact={true} />
+                <Route path="/login" component={LoginPage} />
+                <Route path="/signup" component={SignupPage} />
                 <PrivateRoute path="/play" component={Game} />
                 <Route component={NotFoundPage} />
             </Switch>

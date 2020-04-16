@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { startSignIn } from '../actions/auth';
+import { startSignIn, startSignInAnonymous } from '../actions/auth';
 
-const LoginPage = ({ startSignIn }) => {
+const LoginPage = ({ startSignIn, startSignInAnonymous }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -50,7 +50,7 @@ const LoginPage = ({ startSignIn }) => {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button className="button">Login</button>
-            <button className="button">Go Anonymous</button>
+            <Link className="button" to="/">Go Anonymous</Link>
             <Link className="button" to="/signup">Create Account</Link>
             {errorMessage && <p className="form__error">{errorMessage}</p>}
         </form>
@@ -58,7 +58,8 @@ const LoginPage = ({ startSignIn }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    startSignIn: (email, password) => dispatch(startSignIn(email, password))
+    startSignIn: (email, password) => dispatch(startSignIn(email, password)),
+    startSignInAnonymous: () => dispatch(startSignInAnonymous)
 });
 
 export default connect(undefined, mapDispatchToProps)(LoginPage);

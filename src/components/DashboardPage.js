@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { startSignInAnonymous } from '../actions/auth';
 
-const DashboardPage = () => {
+const DashboardPage = ({ startSignInAnonymous, uid }) => {
+    useEffect(() => {
+        if (!uid) {
+            startSignInAnonymous()
+        }
+    }, []);
     return (
         <div>
             Dashboard content.
@@ -9,5 +16,13 @@ const DashboardPage = () => {
         </div>
     );
 };
-    
-export default DashboardPage;
+
+const mapStateToProps = (state) => ({
+    uid: state.auth.uid
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    startSignInAnonymous: () => dispatch(startSignInAnonymous())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);

@@ -26,18 +26,20 @@ const renderApp = () => {
 
 ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
+
+// TODO: change below path stuff to account for dashboard being the root
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch(login(user.uid));
         store.dispatch(startFetchUsername());
         renderApp();
-        if (history.location.pathname === '/' || history.location.pathname === '/signup') {
-            history.push('/dashboard');
+        if (history.location.pathname === '/login' || history.location.pathname === '/signup') {
+            history.push('/');
         }
     } else {
         store.dispatch(logout());
         store.dispatch(setUsername(''));
         renderApp();
-        history.push('/');
+        history.push('/login');
     }
 });

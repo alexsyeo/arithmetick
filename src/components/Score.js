@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Score = (props) => (
-    <h1>Score: {props.score}</h1>
+const Score = ({ scoreVal }) => (
+    <h1>Score: {scoreVal}</h1>
 );
 
 const mapStateToProps = (state) => {
     return {
-        score: state.score
+        scoreVal: state.score.value
     }
 }
 
