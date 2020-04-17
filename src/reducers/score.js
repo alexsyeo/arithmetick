@@ -1,4 +1,7 @@
-export default (state = { value: 0, posted: false}, action) => {
+const value = 0;
+const posted = false;
+
+export default (state = { value, posted }, action) => {
     switch (action.type) {
         case 'INCREMENT_SCORE':
             return {
@@ -9,6 +12,11 @@ export default (state = { value: 0, posted: false}, action) => {
             return {
                 ...state,
                 posted: true
+            };
+        case 'RESET_SCORE':
+            return {
+                value,
+                posted
             };
         default:
             return state;

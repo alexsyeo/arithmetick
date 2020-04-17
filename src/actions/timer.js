@@ -5,6 +5,10 @@ export const tick = () => ({
     type: 'TICK'
 });
 
+export const resetTimer = () => ({
+    type: 'RESET_TIMER'
+});
+
 export const startTick = () => {
     return (dispatch, getState) => {
         const timer = getState().timer;

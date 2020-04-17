@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { resetLives } from '../actions/lives';
 
-const Lives = (props) => (
-    <h2>Lives: {props.lives}</h2>
-);
+const Lives = ({ lives, resetLives }) => {
+    useEffect(() => {
+        resetLives();
+    }, []);
 
-const mapStateToProps = (state) => {
-    return {
-        lives: state.lives
-    }
-}
+    return (
+        <h2>Lives: {lives}</h2>
+    ); 
+};
 
-export default connect(mapStateToProps)(Lives);
+const mapStateToProps = (state) => ({
+    lives: state.lives
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    resetLives: () => dispatch(resetLives)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Lives);

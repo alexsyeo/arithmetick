@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { timerFormatted } from '../selectors/timer';
+import { resetTimer } from '../actions/timer';
 
-const Timer = (props) => (
-    <div>
-        <h1>{props.formattedTimer}</h1>
-    </div>
-);
+const Timer = ({ resetTimer, formattedTimer }) => {
+    useEffect(() => {
+        resetTimer();
+    }, []);
 
-const mapStateToProps = (state) => {
-    return {
-        formattedTimer: timerFormatted(state.timer)
-    }
+    return (
+        <div>
+            <h1>{formattedTimer}</h1>
+        </div>
+    );
 };
 
-export default connect(mapStateToProps)(Timer);
+const mapStateToProps = (state) => ({
+    formattedTimer: timerFormatted(state.timer)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    resetTimer: () => dispatch(resetTimer())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timer);

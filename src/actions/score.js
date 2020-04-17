@@ -20,3 +20,7 @@ export const startPostScore = () => {
         }
     };
 };
+
+export const resetScoreState = () => ({
+    type: 'RESET_SCORE'
+});
