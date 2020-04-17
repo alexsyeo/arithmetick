@@ -9,7 +9,6 @@ export const startFetchUserScores = () => {
     return (dispatch, getState) => {
         const uid = getState().auth.uid;
         return database.ref(`users/${uid}/scores`).once('value', (snapshot) => {
-            console.log(snapshot.val());
             dispatch(setUserScores(snapshot.val()));
         });
     };

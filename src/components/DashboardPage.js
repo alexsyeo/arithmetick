@@ -5,7 +5,7 @@ import UserStatistics from '../components/UserStatistics';
 import { startSignInAnonymous } from '../actions/auth';
 import { loggedIn } from '../selectors/auth';
 
-const DashboardPage = ({ loggedIn, startSignInAnonymous, uid }) => {
+const DashboardPage = ({ loggedIn, startSignInAnonymous, uid, username }) => {
     useEffect(() => {
         if (!uid) {
             startSignInAnonymous()
@@ -13,17 +13,25 @@ const DashboardPage = ({ loggedIn, startSignInAnonymous, uid }) => {
     }, []);
     return (
         <div>
-            Dashboard content.
+            <h1>{username}</h1>
             <Link className="button" to="/play">Play</Link>
-            {loggedIn && <UserStatistics />}
+            {loggedIn ? (
+                <UserStatistics />
+            ) : (
+                <h2>Log in to track your statistics and get on the leaderboard!</h2>
+            )}
         </div>
     );
 };
 
-const mapStateToProps = (state) => ({
-    uid: state.auth.uid,
-    loggedIn: loggedIn(state.auth.username)
-});
+const mapStateToProps = (state) => {
+    const username = state.auth.username;
+    return {
+        loggedIn: loggedIn(state.auth.username),
+        uid: state.auth.uid,
+        username
+    };
+}
 
 const mapDispatchToProps = (dispatch) => ({
     startSignInAnonymous: () => dispatch(startSignInAnonymous())

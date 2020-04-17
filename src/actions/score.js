@@ -1,4 +1,5 @@
 import database from '../firebase/firebase';
+import moment from 'moment';
 
 export const incrementScore = (incrementValue) => ({
     type: 'INCREMENT_SCORE',
@@ -14,7 +15,11 @@ export const startPostScore = () => {
         const uid = getState().auth.uid;
         const { value, posted } = getState().score;
         if (!posted) {
-            return database.ref(`users/${uid}/scores`).push(value).then(() => {
+            const scoreObject = {
+                value,
+                timestamp: moment().format()
+            };
+            return database.ref(`users/${uid}/scores`).push(scoreObject).then(() => {
                 dispatch(postScore());
             });
         }
