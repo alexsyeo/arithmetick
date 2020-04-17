@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { resetProblem } from '../actions/problem';
 import { incrementScore } from '../actions/score';
 import { loseLife } from '../actions/lives';
-import evaluateProblem from '../selectors/problem';
-import formatProblem from '../utility/formatProblem';
+import { evaluateProblem, formatProblem } from '../selectors/problem';
 
 const MathProblem = ({
     incrementScore,
-    problem,
+    formattedProblem,
     resetProblem,
+    solution,
     loseLife
 }) => {
     const [answer, setAnswer] = useState('');
@@ -33,7 +33,7 @@ const MathProblem = ({
 
     const onAnswerSubmit = () => {
         // Validate answer, and increment score if correct. Otherwise, lose life.
-        if (answer === evaluateProblem(problem)) {
+        if (answer === solution) {
             incrementScore(incrementValue);
         } else {
             loseLife();
@@ -45,7 +45,7 @@ const MathProblem = ({
 
     return (
         <div>
-            <h1>{formatProblem(problem)}</h1>
+            <h1>{formattedProblem}</h1>
             <input id="userInput"
                 type="number"
                 placeholder="Your Answer"
@@ -64,9 +64,13 @@ const MathProblem = ({
     );
 }
 
-const mapStateToProps = (state) => ({
-    problem: state.problem.problem
-});
+const mapStateToProps = (state) => {
+    const problem = state.problem.problem;
+    return {
+        formattedProblem: formatProblem(problem),
+        solution: evaluateProblem(problem)
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {

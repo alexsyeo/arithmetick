@@ -2,12 +2,10 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
+import { loggedIn } from '../selectors/auth';
 
 export const Header = ({ loggedIn, startLogout }) => {
     const location = useLocation();
-
-    console.log(location);
-    console.log(loggedIn);
 
     return (
         <header className="header">
@@ -28,7 +26,7 @@ export const Header = ({ loggedIn, startLogout }) => {
 };
 
 const mapStateToProps = (state) => ({
-    loggedIn: !!state.auth.username
+    loggedIn: loggedIn(state.auth.username)
 });
 
 const mapDispatchToProps = (dispatch) => ({

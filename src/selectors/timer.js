@@ -4,5 +4,5 @@ export const timerFormatted = (timer) => timer.format("m:ss");
 
 export const outOfTime = (timer) => {
     const endTime = moment("0:00", "m:ss");
-    timer.isSameOrBefore(endTime);
+    return timer.isSameOrBefore(endTime);
 }

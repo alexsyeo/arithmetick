@@ -1,3 +1,5 @@
 import { evaluate } from 'mathjs';
 
-export default (problem) => evaluate(problem).toString(10);
+export const evaluateProblem = (problem) => evaluate(problem).toString(10);
+
+export const formatProblem = (problem) => problem.replace('*', 'x') + ' = ?';

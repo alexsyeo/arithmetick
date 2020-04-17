@@ -7,10 +7,11 @@ import GameOverModal from './GameOverModal';
 import Timer from '../components/Timer';
 import { noLives } from '../selectors/lives';
 import { outOfTime } from '../selectors/timer';
-import { startTick, tick } from '../actions/timer';
+import { tick } from '../actions/timer';
 import { startPostScore } from '../actions/score';
+import { loggedIn } from '../selectors/auth';
 
-const Game = ({ gameOver, history, startPostScore, tick }) => {
+const Game = ({ gameOver, history, loggedIn, startPostScore, tick }) => {
     const [timerID, setTimerID] = useState('');
 
     useEffect(() => {
@@ -22,7 +23,9 @@ const Game = ({ gameOver, history, startPostScore, tick }) => {
     useEffect(() => {
         if (gameOver) {
             clearInterval(timerID);
-            startPostScore();
+            if (loggedIn) {
+                startPostScore();
+            }
         }
     }, [gameOver]);
 
@@ -38,7 +41,8 @@ const Game = ({ gameOver, history, startPostScore, tick }) => {
 };
 
 const mapStateToProps = (state) => ({
-    gameOver: noLives(state.lives) || outOfTime(state.timer)
+    gameOver: noLives(state.lives) || outOfTime(state.timer),
+    loggedIn: loggedIn(state.auth.username)
 });
 
 const mapDispatchToProps = (dispatch) => ({
