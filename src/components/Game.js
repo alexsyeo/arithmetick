@@ -10,8 +10,9 @@ import { outOfTime } from '../selectors/timer';
 import { tick } from '../actions/timer';
 import { startPostScore } from '../actions/score';
 import { loggedIn } from '../selectors/auth';
+import { resetGameState } from '../actions/game';
 
-const Game = ({ gameOver, history, loggedIn, startPostScore, tick }) => {
+const Game = ({ gameOver, history, loggedIn, resetGameState, startPostScore, tick }) => {
     const [timerID, setTimerID] = useState('');
 
     useEffect(() => {
@@ -46,6 +47,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    resetGameState: () => dispatch(resetGameState()),
     startPostScore: () => dispatch(startPostScore()),
     tick: () => dispatch(tick())
 });

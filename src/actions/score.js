@@ -1,8 +1,12 @@
 import database from '../firebase/firebase';
 import moment from 'moment';
 
-export const incrementScore = (incrementValue) => ({
-    type: 'INCREMENT_SCORE',
+export const incrementScore = () => ({
+    type: 'INCREMENT_SCORE'
+});
+
+export const setIncrementValue = (incrementValue) => ({
+    type: 'SET_INCREMENT_VALUE',
     incrementValue
 });
 

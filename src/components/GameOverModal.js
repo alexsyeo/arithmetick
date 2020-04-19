@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { resetGameState } from '../actions/game';
 
 const GameOverModal = ({ gameOver, history, resetGameState, scoreVal }) => {
+    useEffect(() => {
+        return () => resetGameState();
+    }, [])
+    
     return (
         <Modal
             isOpen={gameOver}
@@ -14,7 +18,7 @@ const GameOverModal = ({ gameOver, history, resetGameState, scoreVal }) => {
         >
             <h1 className="modal__title">Game Over!</h1>
             <h2>Your Final Score: {scoreVal}</h2>
-            <button className="button" onClick={() => { resetGameState(); history.push('/play'); }}>Play Again</button>
+            <button className="button" onClick={() => { history.push('/play'); }}>Play Again</button>
             <button className="button" onClick={() => history.push('/')}>Exit</button>
         </Modal>
     );

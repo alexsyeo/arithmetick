@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { recentScores } from '../selectors/userScores';
-import RecentGamesListItem from '../components/RecentGamesListItem';
+import ScoreListItem from '../components/ScoreListItem';
 
 const RecentGamesList = ({ recentScores }) => {
     return (
@@ -9,7 +9,7 @@ const RecentGamesList = ({ recentScores }) => {
             {recentScores && (
                 <div>
                     <h2>Recent Scores:</h2>
-                    {recentScores.map((scoreObject) => <RecentGamesListItem key={scoreObject.timestamp} {...scoreObject}/>)}
+                    {recentScores.map((scoreObject) => <ScoreListItem key={scoreObject.timestamp} {...scoreObject}/>)}
                 </div>
             )}
         </div>

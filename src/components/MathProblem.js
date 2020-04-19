@@ -13,7 +13,6 @@ const MathProblem = ({
     loseLife
 }) => {
     const [answer, setAnswer] = useState('');
-    const [incrementValue, setIncrementValue] = useState(1); // move this to store (?)
 
     useEffect(() => {
         resetProblem();
@@ -34,7 +33,7 @@ const MathProblem = ({
     const onAnswerSubmit = () => {
         // Validate answer, and increment score if correct. Otherwise, lose life.
         if (answer === solution) {
-            incrementScore(incrementValue);
+            incrementScore();
         } else {
             loseLife();
         }
@@ -72,12 +71,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        resetProblem: () => dispatch(resetProblem()),
-        incrementScore: (incrementValue) => dispatch(incrementScore(incrementValue)),
-        loseLife: () => dispatch(loseLife())
-    };
-};
+const mapDispatchToProps = (dispatch) => ({
+    resetProblem: () => dispatch(resetProblem()),
+    incrementScore: () => dispatch(incrementScore()),
+    loseLife: () => dispatch(loseLife())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MathProblem);

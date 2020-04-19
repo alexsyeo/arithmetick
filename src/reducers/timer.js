@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 // TODO: CHANGE BELOW DEFAULT TO 1:00
-const startTime = "0:5";
+const startTime = "1:00";
 
 export default (state = moment(startTime, "m:ss"), action) => {
     switch (action.type) {
