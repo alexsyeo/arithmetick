@@ -7,6 +7,7 @@ import { evaluateProblem, formatProblem } from '../selectors/problem';
 
 const MathProblem = ({
     incrementScore,
+    incrementValue,
     formattedProblem,
     resetProblem,
     solution,
@@ -33,7 +34,7 @@ const MathProblem = ({
     const onAnswerSubmit = () => {
         // Validate answer, and increment score if correct. Otherwise, lose life.
         if (answer === solution) {
-            incrementScore();
+            incrementScore(incrementValue);
         } else {
             loseLife();
         }
@@ -64,16 +65,17 @@ const MathProblem = ({
 }
 
 const mapStateToProps = (state) => {
-    const problem = state.problem.problem;
+    const problemState = state.problem;
     return {
-        formattedProblem: formatProblem(problem),
-        solution: evaluateProblem(problem)
+        formattedProblem: formatProblem(problemState.problem),
+        incrementValue: problemState.value,
+        solution: evaluateProblem(problemState.problem)
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
     resetProblem: () => dispatch(resetProblem()),
-    incrementScore: () => dispatch(incrementScore()),
+    incrementScore: (incrementValue) => dispatch(incrementScore(incrementValue)),
     loseLife: () => dispatch(loseLife())
 });
 

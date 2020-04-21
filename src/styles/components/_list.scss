@@ -3,8 +3,13 @@
     border: 1px solid darken($off-white, 7%);
     color: $grey;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    margin-bottom: 0;
     padding: $s-size $m-size;
+
+    @media (min-width: $desktop-breakpoint) {
+        padding: $m-size;
+    }
 }
 
 .list-body {
@@ -16,10 +21,10 @@
 
 .list-item {
     border: 1px solid darken($off-white, 7%);
-    border-top: none;
     color: $dark-grey;
     display: flex;
     flex-direction: column;
+    margin-bottom: 0;
     padding: $s-size;
     text-decoration: none;
     transition: background .3s ease;
@@ -27,9 +32,6 @@
         background: $off-white;
     }
     @media (min-width: $desktop-breakpoint) {
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-between;
         padding: $m-size;
     }
 }

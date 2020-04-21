@@ -1,0 +1,20 @@
+.list-container {
+    max-width: 23rem;
+    padding: 0 $m-size;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 $l-size;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 50rem;
+}

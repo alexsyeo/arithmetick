@@ -8,7 +8,7 @@ const RecentGamesList = ({ recentScores }) => {
         <div className="list-body">
             {recentScores && (
                 <div>
-                    <h2>Recent Scores:</h2>
+                    <h3 className="list-header">Recent Scores</h3>
                     {recentScores.map((scoreObject) => <ScoreListItem key={scoreObject.timestamp} {...scoreObject}/>)}
                 </div>
             )}

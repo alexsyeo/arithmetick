@@ -10,7 +10,7 @@ const UserStatistics = ({ atLeastOneScore, averageScoreAllTime, averageScoreRece
     }, []);
 
     return (
-        <div className="content-container">
+        <div>
             {atLeastOneScore && (
                 <div>
                     <h2>Average Score (All time): {averageScoreAllTime}</h2>
@@ -18,9 +18,10 @@ const UserStatistics = ({ atLeastOneScore, averageScoreAllTime, averageScoreRece
                         <h2>Average Score (Past 10): {averageScoreRecent}</h2>
                     )}
                 </div>
-            )}   
-            
-            <RecentGamesList />
+            )}
+            <div className="list-container">
+                <RecentGamesList />
+            </div>
         </div>
     );
 };

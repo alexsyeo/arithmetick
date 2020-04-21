@@ -26,8 +26,6 @@ const renderApp = () => {
 
 ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
-
-// TODO: change below path stuff to account for dashboard being the root
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch(login(user.uid));

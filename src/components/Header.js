@@ -9,7 +9,7 @@ export const Header = ({ loggedIn, startLogout }) => {
 
     return (
         <header className="header">
-            <div className="content-container">
+            <div className="container">
                 <div className="header__content">
                     <Link className="header__title" to="/">
                         <h1>Arithmetick</h1>

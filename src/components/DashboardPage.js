@@ -16,12 +16,16 @@ const DashboardPage = ({ loggedIn, startSignInAnonymous, uid, username }) => {
         <div>
             <h1>{username}</h1>
             <Link className="button" to="/play">Play</Link>
-            {loggedIn ? (
-                <UserStatistics />
-            ) : (
-                <h2>Log in to track your statistics and get on the leaderboard!</h2>
-            )}
-            <Leaderboard />
+            <div className="content-container">
+                {loggedIn ? (
+                    <UserStatistics />
+                ) : (
+                    <h2>Log in to track your statistics and get on the leaderboard!</h2>
+                )}
+                <div className="list-container">
+                    <Leaderboard />
+                </div>
+            </div>
         </div>
     );
 };

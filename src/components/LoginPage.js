@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { startSignIn, startSignInAnonymous } from '../actions/auth';
+import { startSignIn } from '../actions/auth';
 
-const LoginPage = ({ startSignIn, startSignInAnonymous }) => {
+const LoginPage = ({ startSignIn }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -16,7 +16,7 @@ const LoginPage = ({ startSignIn, startSignInAnonymous }) => {
                 let newErrorMessage = '';
                 switch(errorCode) {
                     case 'auth/invalid-email':
-                        newErrorMessage = 'This is not a valid email address. Please use a valid email address.';
+                        newErrorMessage = 'Invalid email address. Please use a valid email address.';
                         break;
                     case 'auth/user-disabled':
                         newErrorMessage = 'Your account is currently disabled.';
@@ -33,33 +33,34 @@ const LoginPage = ({ startSignIn, startSignInAnonymous }) => {
     };
 
     return (
-        <form className="form" onSubmit={onSubmit}>
-            <input
-                type="text"
-                placeholder="Email Address"
-                autoFocus
-                className="text-input"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                className="text-input"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button className="button">Login</button>
-            <Link className="button" to="/">Go Anonymous</Link>
-            <Link className="button" to="/signup">Create Account</Link>
-            {errorMessage && <p className="form__error">{errorMessage}</p>}
-        </form>
+        <div className="centered-container">
+            <form className="form" onSubmit={onSubmit}>
+                <input
+                    type="text"
+                    placeholder="Email Address"
+                    autoFocus
+                    className="text-input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    className="text-input"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button className="button">Login</button>
+                <Link className="button" to="/">Go Anonymous</Link>
+                <Link className="button" to="/signup">Create Account</Link>
+                {errorMessage && <p className="form__error">{errorMessage}</p>}
+            </form>
+        </div>
     );
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    startSignIn: (email, password) => dispatch(startSignIn(email, password)),
-    startSignInAnonymous: () => dispatch(startSignInAnonymous)
+    startSignIn: (email, password) => dispatch(startSignIn(email, password))
 });
 
 export default connect(undefined, mapDispatchToProps)(LoginPage);
