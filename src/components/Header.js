@@ -15,9 +15,9 @@ export const Header = ({ loggedIn, startLogout }) => {
                         <h1>Arithmetick</h1>
                     </Link>
                     {loggedIn ? (
-                        <button className="button button--link" onClick={startLogout}>Logout</button>
+                        <button className="button button--link button__no-bottom" onClick={startLogout}>Logout</button>
                     ) : location.pathname !== '/login' && (
-                        <Link className="button button--link" to="/login">Login</Link>
+                        <Link className="button button--link button__no-bottom" to="/login">Login</Link>
                     )}
                 </div>
             </div>

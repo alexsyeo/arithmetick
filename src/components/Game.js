@@ -13,29 +13,42 @@ import { loggedIn } from '../selectors/auth';
 import { resetGameState } from '../actions/game';
 
 const Game = ({ gameOver, history, loggedIn, resetGameState, startPostScore, tick }) => {
-    const [timerID, setTimerID] = useState('');
+    const [timerInterval, setTimerInterval] = useState('');
+
+    const tickIfAlive = () => {
+        if (!gameOver) {
+            tick();
+        }
+    };
 
     useEffect(() => {
-        setTimerID(setInterval(() => {
-            tick();
-        }, 1000));
+        resetGameState();
+        return () => {
+            clearInterval(timerInterval);
+        };
     }, []);
 
     useEffect(() => {
         if (gameOver) {
-            clearInterval(timerID);
+            clearInterval(timerInterval);
             if (loggedIn) {
                 startPostScore();
             }
+        } else {
+            setTimerInterval(setInterval(tickIfAlive, 1000));
         }
     }, [gameOver]);
 
     return (
         <div>
-            <MathProblem />
-            <Score />
-            <Lives />
-            <Timer />
+            <div className="container">
+                <Score />
+                <Lives />
+                <Timer />
+            </div>
+            <div className="centered-container">
+                <MathProblem />
+            </div>
             <GameOverModal gameOver={gameOver} history={history}/>
         </div>
     );

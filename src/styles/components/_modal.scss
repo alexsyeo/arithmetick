@@ -18,16 +18,17 @@
 }
 
 .modal {
-    background: $blue;
+    background: $dark-blue;
     color: white;
-    max-width: 30rem;
+    max-width: 50rem;
     outline: none;
     padding: $l-size;
     text-align: center;
 }
 
 .modal__title {
-    margin: 0 0 $m-size 0;
+    font-size: $font-size-larger;
+    margin: 0 0 $l-size 0;
 }
 
 .modal__body {

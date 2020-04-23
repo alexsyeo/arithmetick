@@ -2,29 +2,22 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import UserStatistics from '../components/UserStatistics';
-import Leaderboard from '../components/Leaderboard';
 import { startSignInAnonymous } from '../actions/auth';
-import { loggedIn } from '../selectors/auth';
 
-const DashboardPage = ({ loggedIn, startSignInAnonymous, uid, username }) => {
+const DashboardPage = ({ startSignInAnonymous, uid, username }) => {
     useEffect(() => {
         if (!uid) {
             startSignInAnonymous()
         }
     }, []);
     return (
-        <div>
-            <h1>{username}</h1>
-            <Link className="button" to="/play">Play</Link>
+        <div className="container">
             <div className="content-container">
-                {loggedIn ? (
-                    <UserStatistics />
-                ) : (
-                    <h2>Log in to track your statistics and get on the leaderboard!</h2>
-                )}
-                <div className="list-container">
-                    <Leaderboard />
+                <div className="column-container">
+                    <h1>{username}</h1>
+                    <Link className="button button--big" to="/play">Play</Link>
                 </div>
+                <UserStatistics />
             </div>
         </div>
     );
@@ -33,7 +26,6 @@ const DashboardPage = ({ loggedIn, startSignInAnonymous, uid, username }) => {
 const mapStateToProps = (state) => {
     const username = state.auth.username;
     return {
-        loggedIn: loggedIn(state.auth.username),
         uid: state.auth.uid,
         username
     };

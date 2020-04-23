@@ -65,3 +65,7 @@ export const startFetchUsers = () => {
         return database.ref('users').once('value');
     };
 };
+
+export const startSendPasswordResetEmail = (email) => {
+    return () => firebase.auth().sendPasswordResetEmail(email);
+};

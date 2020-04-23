@@ -17,9 +17,9 @@ const GameOverModal = ({ gameOver, history, resetGameState, scoreVal }) => {
             ariaHideApp={false}
         >
             <h1 className="modal__title">Game Over!</h1>
-            <h2>Your Final Score: {scoreVal}</h2>
-            <button className="button" onClick={() => { history.push('/play'); }}>Play Again</button>
-            <button className="button" onClick={() => history.push('/')}>Exit</button>
+            <h1>Your Final Score: {scoreVal}</h1>
+            <button className="button button--big button__no-bottom" onClick={() => { history.push('/play'); }}>Play Again</button>
+            <button className="button button--big button__no-bottom" onClick={() => history.push('/')}>Exit</button>
         </Modal>
     );
 };

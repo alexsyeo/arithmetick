@@ -65,10 +65,9 @@ const SignupPage = ({ history, login, startFetchUsers, startSetUsername, startSi
 
     return (
         <div>
-            <button className="button button--separated" onClick={goBack}>&#x2190;</button>
+            <button className="button button--separated button__no-bottom" onClick={goBack}>&#x2190;</button>
             <div className="centered-container">
                 <form className="form" onSubmit={onSubmit}>
-                    
                     <input
                         autoFocus
                         type="text"

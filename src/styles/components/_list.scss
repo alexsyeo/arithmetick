@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 0;
+    margin-top: 0;
     padding: $s-size $m-size;
 
     @media (min-width: $desktop-breakpoint) {

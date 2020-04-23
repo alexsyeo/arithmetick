@@ -8,13 +8,35 @@
     justify-content: center;
 }
 
+.column-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .container {
     margin: 0 auto;
     padding: 0 $l-size;
 }
 
+.container-shift-down {
+    margin-top: 1.6rem;
+}
+
+.container-shift-right {
+    margin-left: 2rem;
+}
+
+.container-shift-right-more {
+    margin-left: 8rem;
+}
+
 .content-container {
     display: flex;
+    justify-content: space-between;
+    max-width: 70rem;
+}
+
+.dashboard-container {
+    display: flex;
     justify-content: space-evenly;
-    max-width: 50rem;
 }

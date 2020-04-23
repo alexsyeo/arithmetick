@@ -53,6 +53,7 @@ const LoginPage = ({ startSignIn }) => {
                 <button className="button">Login</button>
                 <Link className="button" to="/">Go Anonymous</Link>
                 <Link className="button" to="/signup">Create Account</Link>
+                <Link className="dark-blue" to="/forgotpassword">Forgot Password</Link>
                 {errorMessage && <p className="form__error">{errorMessage}</p>}
             </form>
         </div>

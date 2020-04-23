@@ -45,7 +45,7 @@ const MathProblem = ({
 
     return (
         <div>
-            <h1>{formattedProblem}</h1>
+            <h1 className="big-font">{formattedProblem}</h1>
             <input id="userInput"
                 type="number"
                 placeholder="Your Answer"
@@ -54,7 +54,7 @@ const MathProblem = ({
                 onChange={onAnswerChange}
             />
             <button id="userSubmit"
-                className="button"
+                className="button button__no-bottom"
                 disabled={!answer}
                 onClick={onAnswerSubmit}
             >
