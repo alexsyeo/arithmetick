@@ -8,7 +8,7 @@ const Lives = ({ lives, resetLives }) => {
     }, []);
 
     return (
-        <h2>Lives: {lives}</h2>
+        <h1>Lives: {lives}</h1>
     ); 
 };
 

@@ -10,7 +10,7 @@ const Timer = ({ resetTimer, formattedTimer }) => {
 
     return (
         <div>
-            <h1>{formattedTimer}</h1>
+            <h1 className="bigger-font">{formattedTimer}</h1>
         </div>
     );
 };

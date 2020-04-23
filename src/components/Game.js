@@ -11,31 +11,23 @@ import { tick } from '../actions/timer';
 import { startPostScore } from '../actions/score';
 import { loggedIn } from '../selectors/auth';
 import { resetGameState } from '../actions/game';
+import { useInterval } from '../hooks/useInterval'
 
 const Game = ({ gameOver, history, loggedIn, resetGameState, startPostScore, tick }) => {
-    const [timerInterval, setTimerInterval] = useState('');
+    const [shouldTick, setShouldTick] = useState(!gameOver);
 
-    const tickIfAlive = () => {
-        if (!gameOver) {
-            tick();
-        }
-    };
+    useInterval(() => {
+        tick();
+    }, shouldTick ? 1000 : null);
 
     useEffect(() => {
         resetGameState();
-        return () => {
-            clearInterval(timerInterval);
-        };
     }, []);
 
     useEffect(() => {
-        if (gameOver) {
-            clearInterval(timerInterval);
-            if (loggedIn) {
-                startPostScore();
-            }
-        } else {
-            setTimerInterval(setInterval(tickIfAlive, 1000));
+        setShouldTick(!gameOver);
+        if (gameOver && loggedIn) {
+            startPostScore();
         }
     }, [gameOver]);
 
@@ -46,7 +38,7 @@ const Game = ({ gameOver, history, loggedIn, resetGameState, startPostScore, tic
                 <Lives />
                 <Timer />
             </div>
-            <div className="centered-container">
+            <div className="centered-container container-shift-up">
                 <MathProblem />
             </div>
             <GameOverModal gameOver={gameOver} history={history}/>

@@ -19,7 +19,7 @@ const Score = ({ resetScoreState, scoreVal, setLevelFour, setLevelThree, setLeve
     }, [scoreVal]);
     
     return (
-        <h1>Score: {scoreVal}</h1>
+        <h1 className="big-font">Score: {scoreVal}</h1>
     );
 }
 

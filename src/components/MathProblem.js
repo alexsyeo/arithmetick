@@ -45,7 +45,7 @@ const MathProblem = ({
 
     return (
         <div>
-            <h1 className="big-font">{formattedProblem}</h1>
+            <h1 className="bigger-font">{formattedProblem}</h1>
             <input id="userInput"
                 type="number"
                 placeholder="Your Answer"

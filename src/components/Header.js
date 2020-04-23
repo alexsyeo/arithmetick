@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
 import { loggedIn } from '../selectors/auth';
 
-export const Header = ({ loggedIn, startLogout }) => {
+export const Header = ({ history, loggedIn, startLogout }) => {
     const location = useLocation();
 
     return (
@@ -15,7 +15,15 @@ export const Header = ({ loggedIn, startLogout }) => {
                         <h1>Arithmetick</h1>
                     </Link>
                     {loggedIn ? (
-                        <button className="button button--link button__no-bottom" onClick={startLogout}>Logout</button>
+                        <button
+                            className="button button--link button__no-bottom"
+                            onClick={() => {
+                                history.push('/login');
+                                startLogout();
+                            }
+                        }>
+                            Logout
+                        </button>
                     ) : location.pathname !== '/login' && (
                         <Link className="button button--link button__no-bottom" to="/login">Login</Link>
                     )}

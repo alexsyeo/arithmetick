@@ -21,7 +21,7 @@ const UserStatistics = ({
     return (
         <div className="centered-container container-shift-down">
             {loggedIn ? (
-                atLeastOneScore && (
+                atLeastOneScore ? (
                     <div>
                         <div className="container-shift-right">
                             <h2>Average Score (All time): {averageScoreAllTime}</h2>
@@ -38,6 +38,12 @@ const UserStatistics = ({
                             </div>
                         </div>
                         
+                    </div>
+                ) : (
+                    <div className="container-shift-right-more container-shift-down">
+                        <div className="list-container">
+                            <Leaderboard />
+                        </div>
                     </div>
                 )
             ) : (
