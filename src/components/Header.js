@@ -11,21 +11,21 @@ export const Header = ({ history, loggedIn, startLogout }) => {
         <header className="header">
             <div className="container">
                 <div className="header__content">
-                    <Link className="header__title" to="/">
+                    <Link className="header__title" to="/dashboard">
                         <h1>Arithmetick</h1>
                     </Link>
                     {loggedIn ? (
                         <button
                             className="button button--link button__no-bottom"
                             onClick={() => {
-                                history.push('/login');
+                                history.push('/');
                                 startLogout();
                             }
                         }>
                             Logout
                         </button>
-                    ) : location.pathname !== '/login' && (
-                        <Link className="button button--link button__no-bottom" to="/login">Login</Link>
+                    ) : location.pathname !== '/' && (
+                        <Link className="button button--link button__no-bottom" to="/">Login</Link>
                     )}
                 </div>
             </div>

@@ -29,11 +29,13 @@ ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch(login(user.uid));
-        store.dispatch(startFetchUsername());
-        renderApp();
-        if (history.location.pathname === '/login' || history.location.pathname === '/signup') {
-            history.push('/');
-        }
+        store.dispatch(startFetchUsername()).then(() => {
+            renderApp();
+            const currentPath = history.location.pathname;
+            if (currentPath === '/' || currentPath === '/signup' || currentPath === '/quickplay') {
+                history.push('/dashboard');
+            }
+        });
     } else {
         store.dispatch(logout());
         store.dispatch(setUsername(''));

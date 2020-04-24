@@ -41,6 +41,7 @@ export const setUsername = (username) => ({
 export const startSetUsername = (username) => {
     return (dispatch, getState) => {
         const uid = getState().auth.uid;
+        console.log('UID: ' + uid);
         return database.ref(`users/${uid}`).set({ username: username }).then(() => {
             dispatch(setUsername(username));
         });

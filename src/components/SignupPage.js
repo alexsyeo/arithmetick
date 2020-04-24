@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { login, startFetchUsers, startSignup, startSetUsername } from '../actions/auth';
+import { goBack } from '../utility/history';
 
 const SignupPage = ({ history, login, startFetchUsers, startSetUsername, startSignup }) => {
     const [email, setEmail] = useState('');
@@ -8,10 +9,6 @@ const SignupPage = ({ history, login, startFetchUsers, startSetUsername, startSi
     const [username, setUsername] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [userSnapshots, setUserSnapshots] = useState([]);
-
-    const goBack = () => {
-        history.goBack();
-    };
 
     const usernameExists = () => {
         let exists = false;
@@ -65,7 +62,7 @@ const SignupPage = ({ history, login, startFetchUsers, startSetUsername, startSi
 
     return (
         <div>
-            <button className="button button--separated button__no-bottom" onClick={goBack}>&#x2190;</button>
+            <button className="button button--separated button__no-bottom" onClick={() => { goBack(history) }}>&#x2190;</button>
             <div className="centered-container">
                 <form className="form" onSubmit={onSubmit}>
                     <input

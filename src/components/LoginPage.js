@@ -51,9 +51,9 @@ const LoginPage = ({ startSignIn }) => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button className="button">Login</button>
-                <Link className="button" to="/">Go Anonymous</Link>
                 <Link className="button" to="/signup">Create Account</Link>
                 <Link className="dark-blue" to="/forgotpassword">Forgot Password</Link>
+                <Link className="button" to="/quickplay">Quick Play</Link>
                 {errorMessage && <p className="form__error">{errorMessage}</p>}
             </form>
         </div>
