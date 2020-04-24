@@ -1,13 +1,13 @@
 import * as firebase from 'firebase';
 
 const config = {
-    apiKey: process.env.FIREBASE_API_KEY,
-    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    apiKey: 'AIzaSyDUK8ajtiuDvp1inaqjMUMQkCpkigbBMH4',
+    authDomain: 'arithmetick-ad942.firebaseapp.com',
     databaseURL:'https://arithmetick-ad942.firebaseio.com',
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.FIREBASE_APP_ID,
+    projectId: 'arithmetick-ad942',
+    storageBucket: 'arithmetick-ad942.appspot.com',
+    messagingSenderId: '1018796504871',
+    appId: '1:1018796504871:web:34b55a576b5dae52fbdb02',
 };
 
 firebase.initializeApp(config);
