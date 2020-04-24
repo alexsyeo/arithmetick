@@ -31,11 +31,11 @@ const Game = ({ gameOver, history, loggedIn, resetGameState, startPostScore, tic
         }
     }, [gameOver]);
 
+    // <Lives /> used to be after <Score />
     return (
         <div>
             <div className="container">
                 <Score />
-                <Lives />
                 <Timer />
             </div>
             <div className="centered-container container-shift-up">

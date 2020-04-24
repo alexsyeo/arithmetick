@@ -13,9 +13,10 @@ const Score = ({ resetScoreState, scoreVal, setLevelFour, setLevelThree, setLeve
             setLevelTwo();
         } else if (scoreVal === 15) {
             setLevelThree();
-        } else if (scoreVal === 40) {
-            setLevelFour();
         }
+        // } else if (scoreVal === 40) {
+        //     setLevelFour();
+        // }
     }, [scoreVal]);
     
     return (

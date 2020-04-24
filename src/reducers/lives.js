@@ -1,4 +1,5 @@
-const numLives = 3;
+// const numLives = 3;
+const numLives = 1;
 
 export default (state = numLives, action) => {
     switch (action.type) {
