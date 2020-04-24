@@ -1,1 +1,3 @@
-# arithmatick
+# arithmetick
+
+https://arithmetick.herokuapp.com/
