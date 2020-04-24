@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { startFetchUserScores } from '../actions/userScores';
 import { loggedIn } from '../selectors/auth';
-import { atLeastOneScore, averageScore, moreThanTenScores, recentScoresAverage } from '../selectors/userScores';
+import { atLeastOneScore, atLeastTenScores, averageScore, recentScoresAverage } from '../selectors/userScores';
 import RecentGamesList from '../components/RecentGamesList';
 import Leaderboard from '../components/Leaderboard';
 
 const UserStatistics = ({
     atLeastOneScore,
+    atLeastTenScores,
     averageScoreAllTime,
     averageScoreRecent,
     loggedIn,
-    moreThanTenScores,
     startFetchUserScores
 }) => {
     useEffect(() => {
@@ -25,7 +25,7 @@ const UserStatistics = ({
                     <div>
                         <div className="container-shift-right">
                             <h2>Average Score (All time): {averageScoreAllTime}</h2>
-                            {moreThanTenScores && (
+                            {atLeastTenScores && (
                                 <h2>Average Score (Past 10): {averageScoreRecent}</h2>
                             )}
                         </div>
@@ -60,10 +60,10 @@ const UserStatistics = ({
 
 const mapStateToProps = (state) => ({
     atLeastOneScore: atLeastOneScore(state.userScores),
+    atLeastTenScores: atLeastTenScores(state.userScores),
     averageScoreAllTime: averageScore(state.userScores),
     averageScoreRecent: recentScoresAverage(state.userScores),
-    loggedIn: loggedIn(state.auth.username),
-    moreThanTenScores: moreThanTenScores(state.userScores)
+    loggedIn: loggedIn(state.auth.username)
 });
 
 const mapDispatchToProps = (dispatch) => ({

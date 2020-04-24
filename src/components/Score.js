@@ -11,7 +11,7 @@ const Score = ({ resetScoreState, scoreVal, setLevelFour, setLevelThree, setLeve
     useEffect(() => {
         if (scoreVal === 5) {
             setLevelTwo();
-        } else if (scoreVal === 15) {
+        } else if (scoreVal >= 30) {
             setLevelThree();
         }
         // } else if (scoreVal === 40) {

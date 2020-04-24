@@ -21,4 +21,4 @@ export const recentScoresAverage = (scores) => {
 
 export const atLeastOneScore = (scores) => scores && numberOfScores(scores) > 0;
 
-export const moreThanTenScores = (scores) => scores && numberOfScores(scores) > 10;
+export const atLeastTenScores = (scores) => scores && numberOfScores(scores) >= 10;
