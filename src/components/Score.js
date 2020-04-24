@@ -9,11 +9,12 @@ const Score = ({ resetScoreState, scoreVal, setLevelFour, setLevelThree, setLeve
     }, []);
 
     useEffect(() => {
-        if (scoreVal === 5) {
+        if (scoreVal === 10) {
             setLevelTwo();
-        } else if (scoreVal >= 30) {
-            setLevelThree();
         }
+        // } else if (scoreVal >= 50) {
+        //     setLevelThree();
+        // }
         // } else if (scoreVal === 40) {
         //     setLevelFour();
         // }
@@ -25,7 +26,7 @@ const Score = ({ resetScoreState, scoreVal, setLevelFour, setLevelThree, setLeve
 }
 
 const mapStateToProps = (state) => ({
-    scoreVal: state.score.value
+    scoreVal: state.score
 });
 
 const mapDispatchToProps = (dispatch) => ({

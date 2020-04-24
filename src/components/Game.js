@@ -13,7 +13,7 @@ import { loggedIn } from '../selectors/auth';
 import { resetGameState } from '../actions/game';
 import { useInterval } from '../hooks/useInterval'
 
-const Game = ({ gameOver, history, loggedIn, resetGameState, startPostScore, tick }) => {
+const Game = ({ gameOver, history, loggedIn, resetGameState, score, startPostScore, tick }) => {
     const [shouldTick, setShouldTick] = useState(!gameOver);
 
     useInterval(() => {
@@ -27,7 +27,7 @@ const Game = ({ gameOver, history, loggedIn, resetGameState, startPostScore, tic
     useEffect(() => {
         setShouldTick(!gameOver);
         if (gameOver && loggedIn) {
-            startPostScore();
+            startPostScore(score);
         }
     }, [gameOver]);
 
@@ -48,12 +48,13 @@ const Game = ({ gameOver, history, loggedIn, resetGameState, startPostScore, tic
 
 const mapStateToProps = (state) => ({
     gameOver: noLives(state.lives) || outOfTime(state.timer),
-    loggedIn: loggedIn(state.auth.username)
+    loggedIn: loggedIn(state.auth.username),
+    score: state.score
 });
 
 const mapDispatchToProps = (dispatch) => ({
     resetGameState: () => dispatch(resetGameState()),
-    startPostScore: () => dispatch(startPostScore()),
+    startPostScore: (score) => dispatch(startPostScore(score)),
     tick: () => dispatch(tick())
 });
 

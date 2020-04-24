@@ -21,7 +21,8 @@ export const setLevelTwo = () => {
         const numElements = 2;
         const numDigits = 2;
         const operators = ['+', '-'];
-        const value = 2;
+        const value = 1;
+        // const value = 2;
         const modes = [{
             numElements,
             numDigits,

@@ -25,7 +25,7 @@ const GameOverModal = ({ gameOver, history, resetGameState, scoreVal }) => {
 };
 
 const mapStateToProps = (state) => ({
-    scoreVal: state.score.value
+    scoreVal: state.score
 });
 
 const mapDispatchToProps = (dispatch) => ({
