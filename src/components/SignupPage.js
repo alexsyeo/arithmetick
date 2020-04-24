@@ -75,8 +75,9 @@ const SignupPage = ({ history, login, startFetchUsers, startSetUsername, startSi
                         className="text-input"
                         value={username}
                         onChange={(e) => {
-                            if (e.target.value.length < 20) {
-                                setUsername(e.target.value);
+                            const newVal = e.target.value.trim();
+                            if (newVal.length < 20) {
+                                setUsername(newVal);
                             }
                         }}
                     />
