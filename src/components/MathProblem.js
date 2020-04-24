@@ -47,11 +47,12 @@ const MathProblem = ({
         <div>
             <h1 className="bigger-font">{formattedProblem}</h1>
             <input id="userInput"
-                type="number"
-                placeholder="Your Answer"
+                autoFocus
                 className="text-input"
-                value={answer}
                 onChange={onAnswerChange}
+                placeholder="Your Answer"
+                type="number"
+                value={answer}
             />
             <button id="userSubmit"
                 className="button button__no-bottom"
