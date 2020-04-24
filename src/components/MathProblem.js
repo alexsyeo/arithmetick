@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { resetProblem } from '../actions/problem';
 import { incrementScore } from '../actions/score';
@@ -14,6 +14,7 @@ const MathProblem = ({
     loseLife
 }) => {
     const [answer, setAnswer] = useState('');
+    const inputEl = useRef(null);
 
     useEffect(() => {
         resetProblem();
@@ -35,12 +36,12 @@ const MathProblem = ({
         // Validate answer, and increment score if correct. Otherwise, lose life.
         if (answer === solution) {
             incrementScore(incrementValue);
+            resetProblem();
+            setAnswer('');
+            inputEl.current.focus();
         } else {
             loseLife();
         }
-
-        resetProblem();
-        setAnswer('');
     };
 
     return (
@@ -51,6 +52,7 @@ const MathProblem = ({
                 className="text-input"
                 onChange={onAnswerChange}
                 placeholder="Your Answer"
+                ref={inputEl}
                 type="number"
                 value={answer}
             />
