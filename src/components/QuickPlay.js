@@ -37,7 +37,8 @@ const QuickPlay = ({ history, login, startFetchUsers, startSetUsername, startSig
         startSignInAnonymous().then((user) => {
             login(user.user.uid);
             startSetUsername(username);
-        })
+            history.push('/dashboard');
+        });
     };
 
     return (
