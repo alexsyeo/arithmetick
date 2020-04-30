@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import ScoreListItem from '../components/ScoreListItem';
+import LeaderboardItem from './LeaderboardItem';
 import { startSetLeaderboardData } from '../actions/leaderboard';
+import { getTopTen } from '../selectors/leaderboard';
 
 const Leaderboard = ({ leaderboardData, startSetLeaderboardData }) => {
     useEffect(() => {
@@ -13,7 +14,7 @@ const Leaderboard = ({ leaderboardData, startSetLeaderboardData }) => {
             {leaderboardData && (
                 <div>
                     <h3 className="list-header">Leaderboard</h3>
-                    {leaderboardData.map((leaderboardDataItem) => <ScoreListItem key={leaderboardDataItem.id} {...leaderboardDataItem}/>)}
+                    {leaderboardData.map((leaderboardDataItem) => <LeaderboardItem key={leaderboardDataItem.id} {...leaderboardDataItem}/>)}
                 </div>
             )}
         </div>
@@ -21,7 +22,7 @@ const Leaderboard = ({ leaderboardData, startSetLeaderboardData }) => {
 };
 
 const mapStateToProps = (state) => ({
-    leaderboardData: state.leaderboard
+    leaderboardData: getTopTen(state.leaderboard)
 });
 
 const mapDispatchToProps = (dispatch) => ({

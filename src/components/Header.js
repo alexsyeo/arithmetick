@@ -1,44 +1,18 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { startLogout } from '../actions/auth';
-import { loggedIn } from '../selectors/auth';
+import { Link } from 'react-router-dom';
 
-export const Header = ({ history, loggedIn, startLogout }) => {
-    const location = useLocation();
-
+export const Header = () => {
     return (
         <header className="header">
             <div className="container">
                 <div className="header__content">
-                    <Link className="header__title" to="/dashboard">
+                    <Link className="header__title" to="/">
                         <h1>Arithmetick</h1>
                     </Link>
-                    {loggedIn ? (
-                        <button
-                            className="button button--link button__no-bottom"
-                            onClick={() => {
-                                history.push('/');
-                                startLogout();
-                            }
-                        }>
-                            Logout
-                        </button>
-                    ) : location.pathname !== '/' && (
-                        <Link className="button button--link button__no-bottom" to="/">Login</Link>
-                    )}
                 </div>
             </div>
         </header>
     );
 };
 
-const mapStateToProps = (state) => ({
-    loggedIn: loggedIn(state.auth.username)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    startLogout: () => dispatch(startLogout())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

@@ -18,8 +18,8 @@ const GameOverModal = ({ gameOver, history, resetGameState, scoreVal }) => {
         >
             <h1 className="modal__title">Game Over!</h1>
             <h1>Your Final Score: {scoreVal}</h1>
-            <button className="button button--big button__no-bottom" onClick={() => { history.push('/play'); }}>Play Again</button>
-            <button className="button button--big button__no-bottom" onClick={() => history.push('/dashboard')}>Exit</button>
+            <button className="button button--big button__no-bottom" onClick={() => history.push('/play')}>Play Again</button>
+            <button className="button button--big button__no-bottom" onClick={() => history.push('/')}>Exit</button>
         </Modal>
     );
 };

@@ -1,0 +1,1 @@
+export const getTopTen = (leaderboardData) => leaderboardData.slice(0, 10);

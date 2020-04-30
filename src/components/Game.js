@@ -2,18 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import MathProblem from '../components/MathProblem';
 import Score from '../components/Score';
-import Lives from '../components/Lives';
 import GameOverModal from './GameOverModal';
 import Timer from '../components/Timer';
 import { noLives } from '../selectors/lives';
 import { outOfTime } from '../selectors/timer';
 import { tick } from '../actions/timer';
 import { startPostScore } from '../actions/score';
-import { loggedIn } from '../selectors/auth';
 import { resetGameState } from '../actions/game';
 import { useInterval } from '../hooks/useInterval'
 
-const Game = ({ gameOver, history, loggedIn, resetGameState, score, startPostScore, tick }) => {
+const Game = ({ gameOver, history, resetGameState, score, startPostScore, tick }) => {
     const [shouldTick, setShouldTick] = useState(!gameOver);
 
     useInterval(() => {
@@ -26,7 +24,7 @@ const Game = ({ gameOver, history, loggedIn, resetGameState, score, startPostSco
 
     useEffect(() => {
         setShouldTick(!gameOver);
-        if (gameOver && loggedIn) {
+        if (gameOver) {
             startPostScore(score);
         }
     }, [gameOver]);
@@ -48,7 +46,6 @@ const Game = ({ gameOver, history, loggedIn, resetGameState, score, startPostSco
 
 const mapStateToProps = (state) => ({
     gameOver: noLives(state.lives) || outOfTime(state.timer),
-    loggedIn: loggedIn(state.auth.username),
     score: state.score
 });
 

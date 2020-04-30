@@ -1,4 +1,4 @@
-import { startFetchUsers } from '../actions/auth';
+import database from '../firebase/firebase';
 
 export const setLeaderboardData = (data) => ({
     type: 'SET_LEADERBOARD_DATA',
@@ -7,23 +7,18 @@ export const setLeaderboardData = (data) => ({
 
 export const startSetLeaderboardData = () => {
     return (dispatch) => {
-        return dispatch(startFetchUsers()).then((snapshot) => {
-            const usersObject = snapshot.val();
+        return database.ref('leaderboard').once('value', (snapshot) => {
+            const leaderboardObject = snapshot.val();
             const leaderboardData = [];
-            for (let userId in usersObject) {
-                const userObject = usersObject[userId];
-                const userScoresObject = userObject.scores;
-                for (let scoreObjectId in userScoresObject) {
-                    const { value } = userScoresObject[scoreObjectId];
-                    leaderboardData.push({
-                        id: scoreObjectId,
-                        username: userObject.username,
-                        value
-                    });
-                }
+            for (let leaderboardItemObjectId in leaderboardObject) {
+                const leaderboardItemObject = leaderboardObject[leaderboardItemObjectId];
+                leaderboardData.push({
+                    id: leaderboardItemObjectId,
+                    ...leaderboardItemObject
+                });
             }
-            leaderboardData.sort((a, b) => b.value - a.value);
-            dispatch(setLeaderboardData(leaderboardData.slice(0, 10)));
-        });
+            leaderboardData.sort((a, b) => b.score - a.score);
+            dispatch(setLeaderboardData(leaderboardData));
+        })
     };
 };

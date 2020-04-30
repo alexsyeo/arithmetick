@@ -7,7 +7,7 @@ export const incrementScore = (incrementValue) => ({
 });
 
 export const startPostScore = (score) => {
-    return (dispatch, getState) => {
+    return (getState) => {
         const uid = getState().auth.uid;
         const scoreObject = {
             value: score,
