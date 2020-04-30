@@ -7,11 +7,11 @@ import Timer from '../components/Timer';
 import { noLives } from '../selectors/lives';
 import { outOfTime } from '../selectors/timer';
 import { tick } from '../actions/timer';
-import { startPostScore } from '../actions/score';
 import { resetGameState } from '../actions/game';
 import { useInterval } from '../hooks/useInterval'
+import { startSetLeaderboardData } from '../actions/leaderboard';
 
-const Game = ({ gameOver, history, resetGameState, score, startPostScore, tick }) => {
+const Game = ({ gameOver, history, resetGameState, startSetLeaderboardData, tick }) => {
     const [shouldTick, setShouldTick] = useState(!gameOver);
 
     useInterval(() => {
@@ -23,10 +23,11 @@ const Game = ({ gameOver, history, resetGameState, score, startPostScore, tick }
     }, []);
 
     useEffect(() => {
-        setShouldTick(!gameOver);
-        if (gameOver) {
-            startPostScore(score);
+        if (!gameOver) {
+            startSetLeaderboardData();
         }
+
+        setShouldTick(!gameOver);
     }, [gameOver]);
 
     // <Lives /> used to be after <Score />
@@ -51,7 +52,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     resetGameState: () => dispatch(resetGameState()),
-    startPostScore: (score) => dispatch(startPostScore(score)),
+    startSetLeaderboardData: () => dispatch(startSetLeaderboardData()),
     tick: () => dispatch(tick())
 });
 

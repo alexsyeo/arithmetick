@@ -44,6 +44,12 @@ module.exports = (env) => {
                         }
                     ]
                 })
+            }, {
+                test: /\.(gif|svg|jpg|png)$/,
+                loader: "url-loader",
+                options: {
+                    limit: 8192
+                }
             }]
         },
         plugins: [

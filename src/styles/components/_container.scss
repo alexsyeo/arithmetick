@@ -1,8 +1,3 @@
-.list-container {
-    max-width: 23rem;
-    padding: 0 $m-size;
-}
-
 .centered-container {
     display: flex;
     justify-content: center;
@@ -43,4 +38,10 @@
 .dashboard-container {
     display: flex;
     justify-content: space-evenly;
+}
+
+.list-container {
+    margin-bottom: $xxl-size;
+    margin-top: $m-size;
+    min-width: 23rem;
 }

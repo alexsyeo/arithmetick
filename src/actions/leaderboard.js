@@ -6,19 +6,22 @@ export const setLeaderboardData = (data) => ({
 });
 
 export const startSetLeaderboardData = () => {
-    return (dispatch) => {
-        return database.ref('leaderboard').once('value', (snapshot) => {
-            const leaderboardObject = snapshot.val();
-            const leaderboardData = [];
-            for (let leaderboardItemObjectId in leaderboardObject) {
-                const leaderboardItemObject = leaderboardObject[leaderboardItemObjectId];
-                leaderboardData.push({
-                    id: leaderboardItemObjectId,
-                    ...leaderboardItemObject
-                });
-            }
-            leaderboardData.sort((a, b) => b.score - a.score);
-            dispatch(setLeaderboardData(leaderboardData));
-        })
+    return (dispatch, getState) => {
+        if (getState().leaderboard.length === 0) {
+            return database.ref('leaderboard').once('value', (snapshot) => {
+                const leaderboardObject = snapshot.val();
+                const leaderboardData = [];
+                for (let leaderboardItemObjectId in leaderboardObject) {
+                    const leaderboardItemObject = leaderboardObject[leaderboardItemObjectId];
+                    leaderboardData.push(leaderboardItemObject);
+                }
+                leaderboardData.sort((a, b) => b.score - a.score);
+                dispatch(setLeaderboardData(leaderboardData));
+            });
+        }
     };
+};
+
+export const startPostLeaderboardItemObject = (leaderboardItemObject) => {
+    return () => database.ref('leaderboard').push(leaderboardItemObject);
 };

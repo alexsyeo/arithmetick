@@ -14,7 +14,7 @@ const Leaderboard = ({ leaderboardData, startSetLeaderboardData }) => {
             {leaderboardData && (
                 <div>
                     <h3 className="list-header">Leaderboard</h3>
-                    {leaderboardData.map((leaderboardDataItem) => <LeaderboardItem key={leaderboardDataItem.id} {...leaderboardDataItem}/>)}
+                    {leaderboardData.map((leaderboardDataItem, index) => <LeaderboardItem key={index} index={index} {...leaderboardDataItem}/>)}
                 </div>
             )}
         </div>

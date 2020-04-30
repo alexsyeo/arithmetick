@@ -1,12 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { resetGameState } from '../actions/game';
+import { startPostLeaderboardItemObject } from '../actions/leaderboard';
+import { inTopTen } from '../selectors/leaderboard';
 
-const GameOverModal = ({ gameOver, history, resetGameState, scoreVal }) => {
+const GameOverModal = ({ gameOver, history, inTopTen, resetGameState, score, startPostLeaderboardItemObject }) => {
+    const [username, setUsername] = useState('');
+    const [posted, setPosted] = useState(false);
+    
     useEffect(() => {
         return () => resetGameState();
-    }, [])
+    }, []);
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        startPostLeaderboardItemObject({
+            score,
+            username
+        });
+        setPosted(true);
+    };
+
+    const onClick = () => {
+        resetGameState();
+    };
     
     return (
         <Modal
@@ -17,19 +35,43 @@ const GameOverModal = ({ gameOver, history, resetGameState, scoreVal }) => {
             ariaHideApp={false}
         >
             <h1 className="modal__title">Game Over!</h1>
-            <h1>Your Final Score: {scoreVal}</h1>
-            <button className="button button--big button__no-bottom" onClick={() => history.push('/play')}>Play Again</button>
-            <button className="button button--big button__no-bottom" onClick={() => history.push('/')}>Exit</button>
+            <h1>Your Final Score: {score}</h1>
+
+            {inTopTen && !posted ? (
+                <div>
+                    <h2>You made it on the leaderboard!</h2>
+                    <div className="centered-container">
+                        <form className="form" onSubmit={onSubmit}>
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                autoFocus
+                                className="text-input"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                            <button className="button button--big button__no-bottom">Post Score</button>
+                        </form>
+                    </div>
+                </div>
+            ) : (
+                <div>
+                    <button className="button button--big button__no-bottom" onClick={onClick}>Play Again</button>
+                    <button className="button button--big button__no-bottom" onClick={() => history.push('/')}>Exit</button>
+                </div>
+            )}
         </Modal>
     );
 };
 
 const mapStateToProps = (state) => ({
-    scoreVal: state.score
+    inTopTen: inTopTen(state.leaderboard, state.score),
+    score: state.score
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    resetGameState: () => dispatch(resetGameState())
+    resetGameState: () => dispatch(resetGameState()),
+    startPostLeaderboardItemObject: (leaderboardItemObject) => dispatch(startPostLeaderboardItemObject(leaderboardItemObject))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameOverModal);

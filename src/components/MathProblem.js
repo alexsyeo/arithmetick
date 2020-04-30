@@ -6,19 +6,19 @@ import { loseLife } from '../actions/lives';
 import { evaluateProblem, formatProblem } from '../selectors/problem';
 
 const MathProblem = ({
+    formattedProblem,
     incrementScore,
     incrementValue,
-    formattedProblem,
+    loseLife,
     resetProblem,
-    solution,
-    loseLife
+    solution
 }) => {
     const [answer, setAnswer] = useState('');
     const inputEl = useRef(null);
 
     useEffect(() => {
         resetProblem();
-        document.getElementById('userInput').addEventListener('keyup', (e) => {
+        inputEl.current.addEventListener('keyup', (e) => {
             // 13 represents "Enter" key. This allows the user to press the enter key instead of clicking on the submit button.
             if (e.keyCode === 13) {
                 e.preventDefault();
@@ -51,6 +51,7 @@ const MathProblem = ({
                 autoFocus
                 className="text-input"
                 onChange={onAnswerChange}
+                onFocus={() => setAnswer('')}
                 placeholder="Your Answer"
                 ref={inputEl}
                 type="number"
