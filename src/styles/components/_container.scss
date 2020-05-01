@@ -26,18 +26,20 @@
 }
 
 .container-shift-right-more {
-    margin-left: 8rem;
+    @media (min-width: $desktop-breakpoint) {
+        margin-left: 8rem;
+    }
 }
 
 .content-container {
     display: flex;
     justify-content: space-between;
     max-width: 70rem;
-}
-
-.dashboard-container {
-    display: flex;
-    justify-content: space-evenly;
+    
+    @media (max-width: $desktop-breakpoint) {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .list-container {

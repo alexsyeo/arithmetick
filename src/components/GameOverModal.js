@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { resetGameState } from '../actions/game';
 import { startPostLeaderboardItemObject } from '../actions/leaderboard';
-import { inTopTen } from '../selectors/leaderboard';
+import { inTopFive } from '../selectors/leaderboard';
 
-const GameOverModal = ({ gameOver, history, inTopTen, resetGameState, score, startPostLeaderboardItemObject }) => {
+const GameOverModal = ({ gameOver, history, inTopFive, resetGameState, score, startPostLeaderboardItemObject }) => {
     const [username, setUsername] = useState('');
     const [posted, setPosted] = useState(false);
     
@@ -37,7 +37,7 @@ const GameOverModal = ({ gameOver, history, inTopTen, resetGameState, score, sta
             <h1 className="modal__title">Game Over!</h1>
             <h1>Your Final Score: {score}</h1>
 
-            {inTopTen && !posted ? (
+            {inTopFive && !posted ? (
                 <div>
                     <h2>You made it on the leaderboard!</h2>
                     <div className="centered-container">
@@ -65,7 +65,7 @@ const GameOverModal = ({ gameOver, history, inTopTen, resetGameState, score, sta
 };
 
 const mapStateToProps = (state) => ({
-    inTopTen: inTopTen(state.leaderboard, state.score),
+    inTopFive: inTopFive(state.leaderboard, state.score),
     score: state.score
 });
 
