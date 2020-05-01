@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import LeaderboardItem from './LeaderboardItem';
 import { startSetLeaderboardData } from '../actions/leaderboard';
-import { getTopTen } from '../selectors/leaderboard';
+import { getTopFive } from '../selectors/leaderboard';
 
 const Leaderboard = ({ leaderboardData, startSetLeaderboardData }) => {
     useEffect(() => {
@@ -22,7 +22,7 @@ const Leaderboard = ({ leaderboardData, startSetLeaderboardData }) => {
 };
 
 const mapStateToProps = (state) => ({
-    leaderboardData: getTopTen(state.leaderboard)
+    leaderboardData: getTopFive(state.leaderboard)
 });
 
 const mapDispatchToProps = (dispatch) => ({

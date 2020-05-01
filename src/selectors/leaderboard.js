@@ -1,9 +1,9 @@
-export const getTopTen = (leaderboardData) => leaderboardData.slice(0, 10);
+export const getTopFive = (leaderboardData) => leaderboardData.slice(0, 5);
 
-export const inTopTen = (leaderboardData, score) => {
+export const inTopFive = (leaderboardData, score) => {
     if (leaderboardData.length === 0) {
         return false;
     }
-    const topTen = getTopTen(leaderboardData);
-    return score > topTen[topTen.length - 1].score;
+    const topFive = getTopFive(leaderboardData);
+    return score > topFive[topFive.length - 1].score;
 };

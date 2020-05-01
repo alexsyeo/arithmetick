@@ -1,3 +1,5 @@
+// Below images from Pixel Buddha: https://www.flaticon.com/free-icon/gold-medal_179249
+
 import bronzeMedal from '../../public/images/bronze-medal.svg';
 import goldMedal from '../../public/images/gold-medal.svg';
 import silverMedal from '../../public/images/silver-medal.svg';
