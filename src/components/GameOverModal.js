@@ -18,8 +18,9 @@ const GameOverModal = ({ gameOver, history, inTopFive, resetGameState, score, st
         startPostLeaderboardItemObject({
             score,
             username
+        }).then(() => {
+            setPosted(true);
         });
-        setPosted(true);
     };
 
     const onClick = () => {
