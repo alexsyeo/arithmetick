@@ -58,7 +58,7 @@ const GameOverModal = ({ gameOver, history, inTopFive, resetGameState, score, st
             ) : (
                 <div>
                     <button className="button button--big button__no-bottom" onClick={onClick}>Play Again</button>
-                    <button className="button button--big button__no-bottom" onClick={() => history.push('/')}>Exit</button>
+                    <button className="button button--big button__no-bottom" onClick={() => history.push('/arithmetick')}>Exit</button>
                 </div>
             )}
         </Modal>
