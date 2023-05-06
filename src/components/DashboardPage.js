@@ -7,7 +7,7 @@ const DashboardPage = () => {
         <div className="container">
             <div className="content-container">
                 <div className="column-container">
-                    <Link className="button button--big button__shift-down" to="/play">Play</Link>
+                    <Link className="button button--big button__shift-down" to="/arithmetick/play">Play</Link>
                 </div>
                 <div className="container-shift-right-more container-shift-down">
                     <div className="list-container">
