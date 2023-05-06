@@ -2,7 +2,7 @@
 
 A competitive online game for practicing arithmetic.
 
-https://arithmetick.herokuapp.com/
+https://alexsyeo.github.io/arithmetick
 
 
 For any feedback, please reach out to alexsyeo@gmail.com
