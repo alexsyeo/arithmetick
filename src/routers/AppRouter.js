@@ -13,7 +13,7 @@ const AppRouter = () => (
         <div>
             <Header history={history} />
             <Switch>
-                <Route path="/arithmetick/" component={DashboardPage} exact={true} />
+                <Route path="/arithmetick" component={DashboardPage} exact={true} />
                 <Route path="/arithmetick/play" component={Game} />
                 <Route component={NotFoundPage} />
             </Switch>
